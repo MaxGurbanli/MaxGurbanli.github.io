@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - Max Gurbanli</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="logo">MG</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="active">Contact</a>
+      </div>
+      <button class="theme-toggle" aria-label="Toggle Dark Mode">
+        <span class="toggle-icon">🌙</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-section">
+      <h1>Contact Me</h1>
+      <p>Feel free to reach out if you have any questions, project ideas, or collaboration requests.</p>
+      <form action="https://formspree.io/f/your-form-id" method="POST" class="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="_replyto" placeholder="Your Email" required />
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+      <p>You can also email me directly at <a href="mailto:youremail@example.com">gurbanlimaksud@gmail.com</a>.</p>
+    </section>
+  </main>
+  
+  <footer>
+    <p>&copy; <span id="year-contact"></span> Max Gurbanli. Built with <span class="heart">❤</span>.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

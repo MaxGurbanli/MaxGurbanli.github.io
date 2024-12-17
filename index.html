@@ -3,43 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Developer Portfolio</title>
+  <title>Max Gurbanli - Developer Portfolio</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <header>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="projects.html">Projects</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+      <a href="index.html" class="logo">MG</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <button class="theme-toggle" aria-label="Toggle Dark Mode">
+        <span class="toggle-icon">🌙</span>
+      </button>
     </nav>
   </header>
-  
-  <section class="hero">
-    <h1>Hello, I'm Max</h1>
-    <p>Software Developer specialized in everything.</p>
-  </section>
 
-  <section class="featured-projects">
-    <h2>Featured Projects</h2>
-    <div class="project-list">
-      <div class="project">
-        <h3>Project A</h3>
-        <p>Description of what it does, what tech stack you used, and a link to the repository or demo.</p>
-        <a href="https://github.com/username/project-a" target="_blank">View on GitHub</a>
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Hello, I'm <span class="highlight">Max</span></h1>
+        <p>Software Developer specialized in <span class="highlight">Discord Bot Development</span>.</p>
+        <p class="sub-text">I build interactive, scalable, and reliable solutions.</p>
       </div>
-      <div class="project">
-        <h3>Project B</h3>
-        <p>Description and details…</p>
-        <a href="https://username.github.io/project-b-demo" target="_blank">Live Demo</a>
+      <a href="#featured-projects" class="mouse-scroll">
+        <div class="mouse"></div>
+        <span>scroll</span>
+      </a>
+    </section>
+
+    <section id="featured-projects" class="featured-projects">
+      <h2>Featured Projects</h2>
+      <div class="project-list">
+        <div class="project">
+          <h3>Rune</h3>
+          <p>My flagship Discord Bot for entertainment and guild management.</p>
+          <a href="https://runebot.me" target="_blank">Visit Website</a>
+        </div>
       </div>
-      <!-- Add more projects as needed -->
-    </div>
-  </section>
-  
+    </section>
+  </main>
+
   <footer>
-    <p>&copy; 2024 Max Gurbanli. Built with love and hosted on GitHub Pages.</p>
+    <p>&copy; <span id="year"></span> Max Gurbanli. Built with <span class="heart">❤</span>.</p>
   </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
