@@ -84,18 +84,8 @@ header nav .theme-toggle {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  animation: gradientBackground 8s ease infinite alternate;
+  background: #0a1a1f; /* Static dark color */
   overflow: hidden;
-}
-
-@keyframes gradientBackground {
-  0% {
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  }
-  100% {
-    background: linear-gradient(135deg, #240b36, #2c5364, #0f2027);
-  }
 }
 
 .hero-content h1 {
@@ -117,15 +107,12 @@ header nav .theme-toggle {
 .mouse-scroll {
   position: absolute;
   bottom: 10%;
-  /* Instead of 20px from the bottom, use a percentage so it's always above 
-     the bottom edge a bit more visibly */
   text-align: center;
   font-size: 0.8em;
   color: #ccc;
   text-decoration: none;
   cursor: pointer;
 }
-
 
 .mouse-scroll .mouse {
   width: 24px;
@@ -317,4 +304,37 @@ body.purple-theme header nav .nav-links a {
 body.purple-theme footer {
   background: var(--nav-bg);
   color: var(--text-color);
+}
+
+/* Blob Animation */
+#blob {
+  background-color: white;
+  height: 34vmax;
+  aspect-ratio: 1;
+  position: absolute;
+  left: 50%;
+  top: 50%; 
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: linear-gradient(to right, aquamarine, mediumpurple);
+  animation: rotate 20s infinite;
+  filter: blur(14vmax);
+  opacity: 0.8;
+  z-index: 1;
+  overflow: hidden !important;
+  pointer-events: none;
+}
+
+@keyframes rotate {
+  from {
+    rotate: 0deg;
+  }
+  
+  50% {
+    scale: 1 1.5;
+  }
+  
+  to {
+    rotate: 360deg;
+  }
 }

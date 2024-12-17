@@ -17,9 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Check local storage for theme setting
     if (localStorage.getItem('theme') === 'purple') {
       body.classList.add('purple-theme');
-      toggleIcon.textContent = '🟣'; // Purple circle or another icon to denote the purple theme
+      toggleIcon.textContent = '🟣';
     } else {
-      toggleIcon.textContent = '🌙'; // Default dark theme icon
+      toggleIcon.textContent = '🌙';
     }
   
     themeToggle.addEventListener('click', () => {
@@ -32,5 +32,50 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleIcon.textContent = '🌙';
       }
     });
-  });
-  
+
+    const letters = "abcdefghijklmnopqrstuvwxyz";
+    let interval = null;
+
+    document.querySelector(".hero .randomizable").onmouseover = event => {  
+        let iteration = 0;
+        clearInterval(interval);
+        interval = setInterval(() => {
+            event.target.innerText = event.target.innerText
+                .split("")
+                .map((letter, index) => {
+                    if (index < iteration) {
+                        return event.target.dataset.value[index];
+                    }
+                    return letters[Math.floor(Math.random() * 26)];
+                })
+                .join("");
+            if (iteration >= event.target.dataset.value.length) { 
+                clearInterval(interval);
+            }
+            iteration += 1 / 3;
+        }, 60);
+    };
+
+    // Blob animation effect
+    const blob = document.getElementById("blob");
+
+    window.onpointermove = event => { 
+        const { clientX, clientY } = event;
+
+        blob.animate({
+            left: `${clientX}px`,
+            top: `${clientY}px`,
+            transform: `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`
+        }, { duration: 3000, fill: "forwards" });
+    };
+
+    window.addEventListener("pointermove", e => {
+        const { pageX, pageY } = e;
+
+        blob.animate({
+            left: `${pageX}px`,
+            top: `${pageY}px`,
+            transform: `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`
+        }, { duration: 3000, fill: "forwards" });
+    });
+});
