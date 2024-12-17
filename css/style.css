@@ -311,7 +311,7 @@ body.purple-theme footer {
   background-color: white;
   height: 34vmax;
   aspect-ratio: 1;
-  position: absolute;
+  position: fixed; /* Changed from absolute to fixed */
   left: 50%;
   top: 50%; 
   translate: -50% -50%;

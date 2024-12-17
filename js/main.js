@@ -60,22 +60,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const blob = document.getElementById("blob");
 
     window.onpointermove = event => { 
-        const { clientX, clientY } = event;
-
-        blob.animate({
-            left: `${clientX}px`,
-            top: `${clientY}px`,
-            transform: `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`
-        }, { duration: 3000, fill: "forwards" });
+      const { clientX, clientY } = event;
+      
+      blob.animate({
+        left: `${clientX}px`,
+        top: `${clientY}px`
+      }, { duration: 3000, fill: "forwards" }
+      )
     };
-
+    
     window.addEventListener("pointermove", e => {
-        const { pageX, pageY } = e;
-
-        blob.animate({
-            left: `${pageX}px`,
-            top: `${pageY}px`,
-            transform: `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`
-        }, { duration: 3000, fill: "forwards" });
+      const { pageX, pageY } = e
+      blob.animate(
+        {
+          left: `${pageX}px`,
+          top: `${pageY}px`
+        },
+        { duration: 3000, fill: "forwards" }
+      )
     });
 });
