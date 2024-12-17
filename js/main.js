@@ -15,11 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const toggleIcon = document.querySelector('.toggle-icon');
   
     // Check local storage for theme setting
-    if (localStorage.getItem('theme') === 'purple') {
+    if (localStorage.getItem('theme') === 'dark') {
+      body.classList.remove('purple-theme');
+      toggleIcon.textContent = '🌙';
+    } else {
       body.classList.add('purple-theme');
       toggleIcon.textContent = '🟣';
-    } else {
-      toggleIcon.textContent = '🌙';
     }
   
     themeToggle.addEventListener('click', () => {
