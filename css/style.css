@@ -338,3 +338,8 @@ body.purple-theme footer {
     rotate: 360deg;
   }
 }
+
+a {
+  color: var(--primary-accent);
+  text-decoration: none;
+}
