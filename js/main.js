@@ -1,83 +1,80 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const yearElements = [
-      document.getElementById('year'),
-      document.getElementById('year-about'),
-      document.getElementById('year-projects'),
-      document.getElementById('year-contact')
-    ].filter(el => el !== null);
-  
-    const currentYear = new Date().getFullYear();
-    yearElements.forEach(el => el.textContent = currentYear);
-  
-    // Theme toggle
-    const themeToggle = document.querySelector('.theme-toggle');
-    const body = document.body;
-    const toggleIcon = document.querySelector('.toggle-icon');
-  
-    // Check local storage for theme setting
-    if (localStorage.getItem('theme') === 'dark') {
-      body.classList.remove('purple-theme');
-      toggleIcon.textContent = '🌙';
-    } else {
-      body.classList.add('purple-theme');
-      toggleIcon.textContent = '🟣';
+document.addEventListener('DOMContentLoaded', () => {
+    // Dynamic Year
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
     }
-  
-    themeToggle.addEventListener('click', () => {
-      body.classList.toggle('purple-theme');
-      if (body.classList.contains('purple-theme')) {
-        localStorage.setItem('theme', 'purple');
-        toggleIcon.textContent = '🟣';
-      } else {
-        localStorage.setItem('theme', 'dark');
-        toggleIcon.textContent = '🌙';
-      }
-    });
 
-    const letters = "abcdefghijklmnopqrstuvwxyz";
-    let interval = null;
+    // Scroll Animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
-    document.querySelector(".hero .randomizable").onmouseover = event => {  
-        let iteration = 0;
-        clearInterval(interval);
-        interval = setInterval(() => {
-            event.target.innerText = event.target.innerText
-                .split("")
-                .map((letter, index) => {
-                    if (index < iteration) {
-                        return event.target.dataset.value[index];
-                    }
-                    return letters[Math.floor(Math.random() * 26)];
-                })
-                .join("");
-            if (iteration >= event.target.dataset.value.length) { 
-                clearInterval(interval);
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target); // Only animate once
             }
-            iteration += 1 / 3;
-        }, 60);
-    };
+        });
+    }, observerOptions);
 
-    // Blob animation effect
-    const blob = document.getElementById("blob");
-
-    window.onpointermove = event => { 
-      const { clientX, clientY } = event;
-      
-      blob.animate({
-        left: `${clientX}px`,
-        top: `${clientY}px`
-      }, { duration: 3000, fill: "forwards" }
-      )
-    };
+    // Elements to animate
+    const revealElements = document.querySelectorAll('section h2, .card, .timeline-item, .hero-content');
     
-    window.addEventListener("pointermove", e => {
-      const { pageX, pageY } = e
-      blob.animate(
-        {
-          left: `${pageX}px`,
-          top: `${pageY}px`
-        },
-        { duration: 3000, fill: "forwards" }
-      )
+    revealElements.forEach(el => {
+        el.classList.add('reveal');
+        observer.observe(el);
     });
+
+    // Smooth Scroll for Anchor Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Mouse Tracker (Hero Section Only)
+    const heroSection = document.getElementById('hero-section');
+    const mouseTracker = document.getElementById('mouse-tracker');
+
+    if (heroSection && mouseTracker) {
+        heroSection.addEventListener('mousemove', (e) => {
+            const rect = heroSection.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            mouseTracker.style.left = `${x}px`;
+            mouseTracker.style.top = `${y}px`;
+        });
+    }
+
+
+    // Typewriter Effect
+    const typewriterElement = document.getElementById('typewriter-text');
+    const textToType = "Maksud Gurbanli";
+    let charIndex = 0;
+
+    function typeWriter() {
+        if (charIndex < textToType.length) {
+            typewriterElement.textContent += textToType.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeWriter, 100); // Typing speed
+        }
+    }
+
+    if (typewriterElement) {
+        // Start typing after a small delay
+        setTimeout(typeWriter, 500);
+    }
 });
