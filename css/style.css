@@ -251,7 +251,7 @@ nav {
 
 /* Hero name */
 .hero-headline h1 {
-  font-size: clamp(3.8rem, 11vw, 9rem);
+  font-size: clamp(3.8rem, 11vw, 8rem);
   font-weight: 800;
   line-height: 0.88;
   letter-spacing: -0.03em;
