@@ -1,80 +1,80 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Dynamic Year
-    const yearSpan = document.getElementById('year');
-    if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-    }
 
-    // Scroll Animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+  // ── Dynamic year ─────────────────────────────────────────
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target); // Only animate once
-            }
-        });
-    }, observerOptions);
-
-    // Elements to animate
-    const revealElements = document.querySelectorAll('section h2, .card, .timeline-item, .hero-content');
-    
-    revealElements.forEach(el => {
-        el.classList.add('reveal');
-        observer.observe(el);
+  // ── Stagger reveal delays for grid children ───────────────
+  const staggerGroups = [
+    '.projects-grid .project-card',
+    '.edu-stack .edu-card',
+    '.timeline .timeline-item',
+  ];
+  staggerGroups.forEach(selector => {
+    document.querySelectorAll(selector).forEach((el, i) => {
+      el.style.transitionDelay = `${i * 90}ms`;
     });
+  });
 
-    // Smooth Scroll for Anchor Links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
-    // Mouse Tracker (Hero Section Only)
-    const heroSection = document.getElementById('hero-section');
-    const mouseTracker = document.getElementById('mouse-tracker');
-
-    if (heroSection && mouseTracker) {
-        heroSection.addEventListener('mousemove', (e) => {
-            const rect = heroSection.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            mouseTracker.style.left = `${x}px`;
-            mouseTracker.style.top = `${y}px`;
-        });
-    }
-
-
-    // Typewriter Effect
-    const typewriterElement = document.getElementById('typewriter-text');
-    const textToType = "Maksud Gurbanli";
-    let charIndex = 0;
-
-    function typeWriter() {
-        if (charIndex < textToType.length) {
-            typewriterElement.textContent += textToType.charAt(charIndex);
-            charIndex++;
-            setTimeout(typeWriter, 100); // Typing speed
+  // ── Scroll reveal ─────────────────────────────────────────
+  const revealObserver = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          revealObserver.unobserve(entry.target);
         }
-    }
+      });
+    },
+    { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+  );
 
-    if (typewriterElement) {
-        // Start typing after a small delay
-        setTimeout(typeWriter, 500);
-    }
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ── Active nav link ───────────────────────────────────────
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sections = document.querySelectorAll('section[id], footer[id]');
+
+  const navObserver = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.toggle(
+              'nav-active',
+              link.getAttribute('href') === '#' + entry.target.id
+            );
+          });
+        }
+      });
+    },
+    { rootMargin: '-35% 0px -55% 0px', threshold: 0 }
+  );
+
+  sections.forEach(s => navObserver.observe(s));
+
+  // ── Smooth scroll ─────────────────────────────────────────
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', e => {
+      const id = anchor.getAttribute('href');
+      if (id === '#') return;
+      const target = document.querySelector(id);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // ── Header border on scroll ───────────────────────────────
+  const header = document.getElementById('header');
+  if (header) {
+    const onScroll = () => {
+      header.style.borderBottomColor = window.scrollY > 20
+        ? 'rgba(255,255,255,0.08)'
+        : 'rgba(255,255,255,0.06)';
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
 });
