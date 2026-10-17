@@ -12,7 +12,7 @@
 
   --text:        #E0DBD4;
   --text-subtle: #A39D96;
-  --text-dim:    #5A554F;
+  --text-dim:    #8F8880;
 
   --amber:       #E8924A;
   --amber-dim:   rgba(232, 146, 74, 0.08);
@@ -86,7 +86,8 @@ ul { list-style: none; }
 
 .mono-label {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.7rem;
+  font-size: 0.74rem;
+  font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-dim);
@@ -602,6 +603,35 @@ nav {
   margin-bottom: 1rem;
 }
 
+.tl-list {
+  list-style: none;
+  margin-bottom: 1.25rem;
+}
+
+.tl-list li {
+  position: relative;
+  padding-left: 1.1rem;
+  color: var(--text-subtle);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 0.6rem;
+}
+
+.tl-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 5px;
+  height: 5px;
+  background: var(--amber);
+}
+
+.tl-list strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
 .tl-tags,
 .tags {
   display: flex;
@@ -676,7 +706,8 @@ nav {
 .project-type {
   display: block;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.67rem;
+  font-size: 0.72rem;
+  font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-dim);
@@ -836,7 +867,8 @@ footer {
 
 .form-group label {
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
+  font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-dim);
